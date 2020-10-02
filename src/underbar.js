@@ -133,22 +133,21 @@
   _.once = function (func) {
     // TIP: These variables are stored in a "closure scope" (worth researching),
     // so that they'll remain available to the newly-generated function every
-    // time it's called.
+    // time it's called. Closure is where the function value persists, whereas normally
+    // function values disappears when function is called
     /* START SOLUTION */
-    // read Javascript advanced functions
-
-      let cache = new Map();
-    
-      return function(x) {
-        if (cache.has(x)) {    // if there's such key in cache
-          return cache.get(x); // read the result from it
+    // Need to read Javascript advanced functions: https://javascript.info/call-apply-decorators#func-apply
+    var alreadyCalled = false;
+    var result;
+    // the result from this inner function is persisted, so next time .once is called, it'll remember
+    return function() {
+        if (!alreadyCalled) {
+            result = func.apply(this, arguments);
+            alreadyCalled = true;
         }
-    
-        let result = func(x);  // otherwise call func
-    
-        cache.set(x, result);  // and cache (remember) the result
         return result;
-      };
+    };
+
     // if (func() == undefined) {
     //   var value = func()
     // }
