@@ -381,7 +381,7 @@
         expect(num).to.equal(1);
       });
 
-      it('should apply arguments to the user-defined function', function() {
+      it('should a apply arguments to the user-defined function', function() {
         var add = _.once(function(x, y, z) {
           return x + y + z;
         });
@@ -417,6 +417,7 @@
         });
       });
 
+      
       it('should produce the same result as the non-memoized version', function() {
         expect(add(1, 2)).to.equal(3);
         expect(memoAdd(1, 2)).to.equal(3);
@@ -441,6 +442,7 @@
         expect(spy).to.have.been.calledOnce;
         memoSpy(10);
         expect(spy).to.have.been.calledOnce;
+        //if you pass object a and b you get back same object
       });
 
       it('should not run the memoized function twice when given a reference type as an argument', function() {
