@@ -166,7 +166,6 @@ _.once = function (func) {
 // instead if possible.
 _.memoize = function (func) {
   /* START SOLUTION */
-  _.memoize = function(func) {
 
   let cache = new Map();
   return function () {
@@ -184,6 +183,7 @@ _.memoize = function (func) {
   function hash(args) {
     return args[0] + ',' + args[1];
   }
+  //json.stringify
   /* END SOLUTION */
 };
 
