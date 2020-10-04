@@ -404,8 +404,9 @@
       var add, memoAdd;
 
       beforeEach(function() {
-        add = function(a, b) {
+        add = function(a,b) {
           return a + b;
+          // return _. identity(a) // test if gives same result for 2 objects
         };
 
         memoAdd = _.memoize(add);
@@ -423,10 +424,16 @@
         expect(memoAdd(1, 2)).to.equal(3);
       });
 
+      it('Edge case: will give same results for different objects', function() {
+        expect(memoAdd({name: 'Shelley', age: 26})).to.equal(memoAdd({name: 'Shelley', age: 26}))
+
+      });
+
       it('should give different results for different arguments', function() {
         expect(memoAdd(1, 2)).to.equal(3);
         expect(memoAdd(3, 4)).to.equal(7);
         expect(memoAdd(1, 3)).to.equal(4);
+
       });
 
       it('should not run the memoized function twice when given a primitive type as an argument', function() {
